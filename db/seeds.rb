@@ -5,3 +5,33 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+people_list = [
+"Guillaume",
+"Sophie",
+"Jade",
+"Philippe",
+"Anas",
+"Najib",
+"Marc",
+"Antoine",
+"Thierry",
+"Anthony",
+"Thomas",
+"Vincent",
+"Alexis",
+"Julie",
+"Sabrina",
+"Bertrand",
+"Naïma",
+"François",
+"Othman",
+"Caroline",
+"Didier",
+"Thanh",
+"Manoë"
+]
+
+23.times do |i|
+  Person.create(name: "#{people_list[i]}", email: "#{people_list[i]}@blablamail.com", tel:612345678, sensei: false)
+end
