@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<div class="message"> <%= flash_messages %></div>
 
 <h1>Organization</h1>
 
@@ -29,12 +29,9 @@
 
 <%= link_to 'New Group', new_group_path %>
 
-
-<p id="notice"><%= notice %></p>
-
 <h1>Listing People</h1>
 
-<%= link_to 'Random', root_path %>
+<%= link_to 'Random', method: :random_people%>
 
 <table>
   <thead>

@@ -43,7 +43,7 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
-        format.html { redirect_to @group, notice: 'Group was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
       else
         format.html { render :edit }
@@ -71,6 +71,27 @@ class GroupsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
       params.require(:group).permit(:name, :room, :task)
-      params.require(:person).permit(:name, :email, :tel, :group_id, :sensei)
     end
+
+def random_people
+
+  maxByGroup = (@people.size / @groups.size).ceil
+
+  idGroup = []
+
+  @groups.each do |group|
+    idGroup << group.id
+  end
+
+  @people.each do |i|
+    randomGroup = idGroup.sample
+    i.group_id = randomGroup
+      if @people.where(group_id: randomGroup).size = maxByGroup
+        idGroup.delete(randomGroup)
+      end
+      i.save
+  end
+
+end
+
 end
