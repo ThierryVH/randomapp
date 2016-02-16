@@ -61,6 +61,35 @@ class GroupsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+def random_people
+
+  @people = Person.all
+  @groups = Group.all
+
+  maxByGroup = (@people.size / @groups.size).ceil + 1
+
+  @people.each do |person|
+    person.group_id = nil
+    person.save
+  end
+
+  idGroup = []
+
+  @groups.each do |group|
+    idGroup << group.id
+  end
+
+  @people.each do |i|
+    randomGroup = idGroup.sample
+    i.group_id = randomGroup
+      i.save
+      if @people.where(group_id: randomGroup).size == maxByGroup
+        idGroup.delete(randomGroup)
+      end
+  end
+redirect_to root_path
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -73,25 +102,5 @@ class GroupsController < ApplicationController
       params.require(:group).permit(:name, :room, :task)
     end
 
-def random_people
-
-  maxByGroup = (@people.size / @groups.size).ceil
-
-  idGroup = []
-
-  @groups.each do |group|
-    idGroup << group.id
-  end
-
-  @people.each do |i|
-    randomGroup = idGroup.sample
-    i.group_id = randomGroup
-      if @people.where(group_id: randomGroup).size = maxByGroup
-        idGroup.delete(randomGroup)
-      end
-      i.save
-  end
-
-end
 
 end
