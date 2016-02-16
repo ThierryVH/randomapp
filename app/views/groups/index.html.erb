@@ -2,27 +2,26 @@
 
 <h1>Organization</h1>
 
-<table class="table">
+<!-- <table class="table">
   <thead>
     <tr>
       <th>Name</th>
       <th>Room</th>
+      <th colspan="2"></th>
       <th>Task</th>
-      <th colspan="3"></th>
     </tr>
-  </thead>
+  </thead> -->
 
-  <tbody>
+
     <% @groups.each do |group| %>
-      <tr>
-        <td><%= group.name %></td>
-        <td><%= group.room %></td>
-        <td><%= group.task %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+        <%= group.name %>
+        <%= group.room %>
+        <%= group.task %>
+        <%= link_to 'Edit', edit_group_path(group) %>
+        <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
-  </tbody>
+
 </table>
 
 <br>
@@ -40,6 +39,7 @@
     <% else %>
 <%= link_to 'Random', randomize_path%>
     <% end %>
+
 <table class="table">
   <thead>
     <tr>
