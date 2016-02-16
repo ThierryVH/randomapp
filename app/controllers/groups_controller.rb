@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :minimum, only: [:random_people]
 
   # GET /groups
   # GET /groups.json
@@ -61,13 +62,17 @@ class GroupsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
+
+
+
 def random_people
 
-  @people = Person.all
-  @groups = Group.all
+@people = Person.all
+@groups = Group.all
 
   maxByGroup = (@people.size / @groups.size).ceil + 1
+
 
   @people.each do |person|
     person.group_id = nil
@@ -91,6 +96,7 @@ def random_people
 redirect_to root_path
 end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
@@ -100,6 +106,12 @@ end
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
       params.require(:group).permit(:name, :room, :task)
+    end
+
+    def minimum
+      if Group.all.size < 2
+        redirect_to root_path, notice: 'You need minimum TWO groups to randomize.'
+      end
     end
 
 

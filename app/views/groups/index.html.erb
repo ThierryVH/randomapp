@@ -2,7 +2,7 @@
 
 <h1>Organization</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -31,14 +31,21 @@
 
 <h1>Listing People</h1>
 
+    <% if @groups.size == 0 %>
+<p>We need TWO groups to use the application. </p>
+<p>Please create two groups.<p>
+    <% elsif @groups.size == 1 %>
+<p>You need TWO groups to use the application. </p>
+<p>Please create one more group.<p>
+    <% else %>
 <%= link_to 'Random', randomize_path%>
-
-<table>
+    <% end %>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Email</th>
-      <th>Tel</th>
+      <!-- <th>Email</th>
+      <th>Tel</th> -->
       <th>Group</th>
       <th>Sensei</th>
       <th colspan="3"></th>
@@ -49,8 +56,8 @@
     <% @people.each do |person| %>
       <tr>
         <td><%= person.name %></td>
-        <td><%= person.email %></td>
-        <td>0<%= person.tel %></td>
+        <!-- <td><%= person.email %></td>
+        <td>0<%= person.tel %></td> -->
         <td><%= person.group_id %></td>
         <td><%= person.sensei %></td>
       </tr>
