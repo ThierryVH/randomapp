@@ -31,15 +31,15 @@
 
 <h1>Listing People</h1>
 
-    <% if @groups.size == 0 %>
+    <!-- <% if @groups.size == 0 %>
 <p>We need TWO groups to use the application. </p>
 <p>Please create two groups.<p>
     <% elsif @groups.size == 1 %>
 <p>You need TWO groups to use the application. </p>
 <p>Please create one more group.<p>
     <% else %>
+    <% end %> -->
 <%= link_to 'Random', randomize_path%>
-    <% end %>
 <table class="table">
   <thead>
     <tr>
