@@ -15,14 +15,23 @@
 
     <% @groups.each do |group| %>
 
-        <%= group.name %>
+        <strong><%= group.name %>
         <%= group.room %>
-        <%= group.task %>
+        <%= group.task %></strong>
+        <br>
+        <div>
+          <% @people.each do |person| %>
+          <% if person.group_id == group.id %>
+          <%= person.name %><br>
+          <% end %>
+          <% end %>
+        </div>
         <%= link_to 'Edit', edit_group_path(group) %>
         <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <br>
     <% end %>
 
-</table>
+<!-- </table> -->
 
 <br>
 
