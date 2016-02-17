@@ -15,9 +15,9 @@
 
      <div class="row">
           <% @groups.each do |group| %>
-          <div class="col-md-3" style="display: inline-block;">
+          <div class="inline_display">
                <strong><%= group.name %>
-                    <%= group.room %>
+                    <%= group.room %><br>
                     <%= group.task %></strong>
                <br>
                <div>
@@ -45,7 +45,8 @@
 
 <%= link_to 'New Group', new_group_path %>
 
-<h1>Listing People</h1>
+<br>
+<br>
 
     <% if @groups.size == 0 %>
           <p>We need TWO groups to use the application.</p>
@@ -57,6 +58,9 @@
     <% else %>
           <%= link_to 'Random', randomize_path%>
     <% end %>
+
+<h1>Listing People</h1>
+
 
                     <table class="table">
                          <thead>
