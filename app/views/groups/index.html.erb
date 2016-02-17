@@ -11,8 +11,7 @@
       <th>Task</th>
     </tr>
   </thead> -->
-
-
+  <div class="container">
     <% @groups.each do |group| %>
 
         <strong><%= group.name %>
@@ -22,7 +21,12 @@
         <div>
           <% @people.each do |person| %>
           <% if person.group_id == group.id %>
-          <%= person.name %><br>
+          <% if person.sensei == true %>
+          <span class="sensei_red"><%= best_in_place person, :name %></span>         <%= best_in_place person, :sensei, :as => :select, :collection => {"1" => "sensei", "2" => " "} %>
+          <% else %>
+<%= best_in_place person, :name %>         <%= best_in_place person, :sensei, :as => :select, :collection => {"1" => "sensei", "2" => " "} %>
+          <% end %>
+          <br>
           <% end %>
           <% end %>
         </div>
@@ -30,7 +34,7 @@
         <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %>
         <br>
     <% end %>
-
+</div>
 <!-- </table> -->
 
 <br>

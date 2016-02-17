@@ -75,7 +75,8 @@ def random_people
 
 
   @people.each do |person|
-    person.group_id = nil
+    person.sensei = false
+    person.group_id = "nil"
     person.save
   end
 
