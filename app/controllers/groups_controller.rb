@@ -64,39 +64,33 @@ class GroupsController < ApplicationController
   end
 
 
-
-
-def random_people
-
+# Method to randomize all people
+  def random_people
 @people = Person.all
-@groups = Group.all
 
-  maxByGroup = (@people.size / @groups.size).ceil + 1
-
-
-  @people.each do |person|
-    person.sensei = false
-    person.group_id = "nil"
-    person.save
-  end
-
-  idGroup = []
-
-  @groups.each do |group|
-    idGroup << group.id
-  end
-
-  @people.each do |i|
-    randomGroup = idGroup.sample
-    i.group_id = randomGroup
-      i.save
-      if @people.where(group_id: randomGroup).size == maxByGroup
-        idGroup.delete(randomGroup)
-      end
-  end
-redirect_to root_path
+@people.each do |person|
+  person.sensei = false
+  person.save
 end
 
+    idperson = Person.all.map{|x| x.id}
+    if Group.all.count>0
+      while idperson.count >0
+        Group.all.each do |grp|
+          a = idperson.sample
+          Person.find(a).update_attributes(group_id: grp.id) unless a.nil?
+          ## summarize that:
+          # b = Person.find(a)
+          # b.group_id = grp.id
+          # b.save
+          idperson.delete(a)
+        end
+      end
+      else
+        redirect_to :root, notice: "ther have to be a least one group .Dumbass!"
+      end
+      redirect_to :root, notice: "Yataaaaa ! All has been randomized!!!"
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

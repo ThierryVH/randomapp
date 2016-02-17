@@ -1,4 +1,5 @@
-<div class="message"> <%= flash_messages %></div>
+<div class="message"><%= flash_messages %></div>
+<div class="container">
 
 <h1>Organization</h1>
 
@@ -11,30 +12,33 @@
       <th>Task</th>
     </tr>
   </thead> -->
-  <div class="container">
-    <% @groups.each do |group| %>
 
-        <strong><%= group.name %>
-        <%= group.room %>
-        <%= group.task %></strong>
-        <br>
-        <div>
-          <% @people.each do |person| %>
-          <% if person.group_id == group.id %>
-          <% if person.sensei == true %>
-          <span class="sensei_red"><%= best_in_place person, :name %></span>         <%= best_in_place person, :sensei, :as => :select, :collection => {"1" => "sensei", "2" => " "} %>
-          <% else %>
-<%= best_in_place person, :name %>         <%= best_in_place person, :sensei, :as => :select, :collection => {"1" => "sensei", "2" => " "} %>
+     <div class="row">
+          <% @groups.each do |group| %>
+          <div class="col-md-3" style="display: inline-block;">
+               <strong><%= group.name %>
+                    <%= group.room %>
+                    <%= group.task %></strong>
+               <br>
+               <div>
+                    <% @people.each do |person| %>
+                      <% if person.group_id == group.id %>
+                      <% if person.sensei == true %>
+                        <span class="red"><%= person.name %></span><%= best_in_place person, :sensei, :as => :select, :collection => %w(Sensei ) %>
+                        <% else %>
+                        <%= person.name %><%= best_in_place person, :sensei, :as => :select, :collection => %w(Sensei ) %>
+
+                        <% end %>
+                        <br>
+                      <% end %>
+                    <% end %>
+               </div>
+               <%= link_to 'Edit', edit_group_path(group) %>
+               <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %>
+               <br>
+          </div>
           <% end %>
-          <br>
-          <% end %>
-          <% end %>
-        </div>
-        <%= link_to 'Edit', edit_group_path(group) %>
-        <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <br>
-    <% end %>
-</div>
+     </div>
 <!-- </table> -->
 
 <br>
@@ -44,36 +48,43 @@
 <h1>Listing People</h1>
 
     <% if @groups.size == 0 %>
-<p>We need TWO groups to use the application. </p>
-<p>Please create two groups.<p>
+          <p>We need TWO groups to use the application.</p>
+          <p>Please create two groups.</p>
+
     <% elsif @groups.size == 1 %>
-<p>You need TWO groups to use the application. </p>
-<p>Please create one more group.<p>
+          <p>You need TWO groups to use the application.</p>
+          <p>Please create one more group.</p>
     <% else %>
-<%= link_to 'Random', randomize_path%>
+          <%= link_to 'Random', randomize_path%>
     <% end %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <!-- <th>Email</th>
-      <th>Tel</th> -->
-      <th>Group</th>
-      <th>Sensei</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                    <table class="table">
+                         <thead>
+                              <tr>
+                                   <th>Name</th>
+                                   <!-- <th>Email</th>
+                                        <th>Tel</th> -->
 
-  <tbody>
-    <% @people.each do |person| %>
-      <tr>
-        <td><%= person.name %></td>
-        <!-- <td><%= person.email %></td>
-        <td>0<%= person.tel %></td> -->
-        <td><%= person.group_id %></td>
-        <td><%= person.sensei %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                                   <!-- <th colspan="3"></th> -->
+                              </tr>
+                         </thead>
+
+                         <tbody>
+                              <% @people.each do |person| %>
+                              <tr>
+                                   <td><%= best_in_place person, :name %></td>
+                                   <!-- <td><%= person.email %></td>
+                                        <td>0<%= person.tel %></td> -->
+
+                              </tr>
+                              <% end %>
+                         </tbody>
+                    </table>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+/* Activating Best In Place */
+jQuery(".best_in_place").best_in_place();
+});
+</script>
