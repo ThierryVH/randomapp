@@ -1,30 +1,30 @@
 <div class="message"><%= flash_messages %></div>
 <div class="container">
-<div class="row">
-<h1>RAND'APP</h1>
-</div>
+<header class="row">
+<h1 class="hidden-xs h1-sm">RAND'APP</h1>
+<h1 class="hidden-sm hidden-md hidden-lg h1-xs">RAND'APP</h1>
+<span class="link_people"><%= link_to 'Listing People', people_path%></span>
+</header>
      <div class="row">
           <% @groups.each do |group| %>
-          <div class="inline_display group">
-            <div class="head">
-              <div>
-               <strong><%= group.name %>
-                    <%= group.room %><br>
-                  </div>
-                    <%= group.task %></strong>
+          <div class="inline_display col-xs-12 col-sm-6 col-md-3">
+            <div class="panel panel-default group ">
+            <div class="panel-heading">
+               <h3 class="panel-title"><%= group.name %>
+                    <%= group.room %></h3>
+                    <h4 class="panel-title"><%= group.task %></h4>
                   </div>
 
-               <div>
+               <div class="panel-body">
 
                     <% @people.each do |person| %>
                       <% if person.group_id == group.id %>
                       <% if person.sensei == true %>
-                        <li><span class="red"><%= person.name %></span><%= best_in_place person, :sensei, :as => :select, :collection => {"1" => "Sensei", "2" => "Cancel"} %></li>
+                        <div class="panel"><span class="sensei"><%= person.name %></span><%= best_in_place person, :sensei, :as => :select, :collection => {"1" => "Sensei", "2" => "Cancel"} %></div>
                         <% else %>
-                        <li><%= person.name %><%= best_in_place person, :sensei, :as => :select, :collection => {"1" => "Sensei"} %></li>
+                        <div class="panel panel"><%= person.name %><%= best_in_place person, :sensei, :as => :select, :collection => {"1" => "Sensei"} %></div>
 
                         <% end %>
-                        <br>
                       <% end %>
                     <% end %>
 
@@ -36,38 +36,33 @@
   <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
   <% end %>
                <br>
+               </div>
           </div>
           <% end %>
 
-<div class="inline_display div_new">
-<%= link_to new_group_path, class: "btn btn-new" do%>
+
+<div><%= link_to new_group_path, class: "btn btn-new" do%>
   <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-  <% end %>
-  </div>
+  <% end %></div>
 
      </div>
-<br>
-<br>
 
+    <% if @groups.size >= 2 %>
 <div class="div_random">
-    <% if @groups.size == 0 %>
-          <p>We need TWO groups to use the application.</p>
-          <p>Please create two groups.</p>
-
+          <%= link_to 'RANDOM', randomize_path%>
+  </div>
     <% elsif @groups.size == 1 %>
+    <div class="random_condition col-xs-12 col-sm-6 col-sm-offset-3">
           <p>You need TWO groups to use the application.</p>
           <p>Please create one more group.</p>
+          </div>
     <% else %>
-          <%= link_to 'RANDOM', randomize_path%>
+    <div class="random_condition col-xs-12 col-sm-6 col-sm-offset-3">
+          <p>We need TWO groups to use the application.</p>
+          <p>Please create two groups.</p>
+        </div>
     <% end %>
-    </div>
 
-<h1>Listing People</h1>
-
-                              <% @people.each do |person| %>
-                              <%= best_in_place person, :name %><br>
-
-                              <% end %>
 </div>
 
 <script type="text/javascript">
