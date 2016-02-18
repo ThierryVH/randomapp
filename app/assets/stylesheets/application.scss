@@ -25,6 +25,10 @@ a{
   color: #fff;
 }
 
+a:focus{
+  outline: none;
+}
+
 .link_people{
   position: absolute;
   right: 50px;
@@ -90,12 +94,6 @@ vertical-align: middle;
 text-align: center;
 }
 
-.head{
-  margin-bottom: 10px;
-  border: 1px solid lightgrey;
-  border-radius: 6px;
-}
-
 .random_condition{
   text-align: center;
   background-color: lightgrey;
@@ -104,4 +102,8 @@ text-align: center;
   font-weight: bold;
   padding: 15px 0;
   color: rgb(192,0,0);
+}
+
+.random{
+  margin-bottom: 40px;
 }

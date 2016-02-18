@@ -73,7 +73,7 @@ class GroupsController < ApplicationController
   person.save
 end
 
-    idperson = Person.all.map{|x| x.id}
+    idperson = @people.map{|x| x.id}
     if Group.all.count>0
       while idperson.count >0
         Group.all.each do |grp|
