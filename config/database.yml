@@ -79,7 +79,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: Randapp_production
-  username: Randapp
-  password: <%= ENV['RANDAPP_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  database: Randapp
+  username: deploy
+  password: 170804

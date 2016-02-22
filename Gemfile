@@ -6,9 +6,7 @@ gem 'bootstrap_form'
 
 gem 'best_in_place', '~> 3.0.1'
 
-gem 'better_errors'
 
-gem 'pry'
 
 gem 'rails_12factor'
 
@@ -54,4 +52,17 @@ group :development do
   gem 'quiet_assets'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'capistrano'
+
+  gem 'capistrano-bundler'
+
+  gem 'capistrano-rails'
+
+  gem 'capistrano-rvm'
+
+  gem 'better_errors'
+
+  gem 'pry'
+
 end

@@ -23,7 +23,6 @@
                         <div class="panel"><span class="sensei"><%= person.name %></span><%= best_in_place person, :sensei, :as => :select, :collection => {"1" => "Sensei", "2" => "Cancel"} %></div>
                         <% else %>
                         <div class="panel panel"><%= person.name %><%= best_in_place person, :sensei, :as => :select, :collection => {"1" => "Sensei"} %></div>
-
                         <% end %>
                       <% end %>
                     <% end %>
@@ -63,12 +62,6 @@
           <p>Please create two groups.</p>
         </div>
     <% end %>
-</div>
-</div>
 
-<script type="text/javascript">
-$(document).ready(function() {
-/* Activating Best In Place */
-jQuery(".best_in_place").best_in_place();
-});
-</script>
+</div>
+</div>
