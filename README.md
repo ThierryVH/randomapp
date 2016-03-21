@@ -1,3 +1,3 @@
-# randomapp
+# randomapp  
 
-## Première application réalisée sous Ruby On Rails
+Première application réalisée sous Ruby On Rails
